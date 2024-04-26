@@ -47,6 +47,7 @@ const App = () => {
                             <Route path="/profile" element={<ProfilePage />} />
                         </Route>
                         <Route path="*" element={<Navigate to="/" />} />
+                        <Route path="/signup" element={<SignUpPage />} />
                     </Routes>
                 </AuthContextProvider>
             </BrowserRouter>
