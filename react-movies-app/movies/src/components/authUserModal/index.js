@@ -1,10 +1,5 @@
 import React, { useState, useContext } from "react";
 import { AuthContext } from "../../contexts/authContext";
-import { auth } from "../../auth/firebase";
-import {
-    signInWithEmailAndPassword,
-    createUserWithEmailAndPassword,
-} from "firebase/auth";
 import Typography from "@mui/material/Typography";
 import Modal from "@mui/material/Modal";
 import Box from "@mui/material/Box";
@@ -20,26 +15,27 @@ const UserAuthentication = () => {
 
     const { handleClose, open } = useContext(AuthContext);
 
-    const handleSignIn = async () => {
-        try {
-            await signInWithEmailAndPassword(auth, email, password);
-            setSuccess(true);
-            setTimeout(handleClose, 2000);
-            console.log("User signed in!");
-        } catch (error) {
-            console.error(error);
-        }
-    };
+    // Firebase Code
+    // const handleSignIn = async () => {
+    //     try {
+    //         await signInWithEmailAndPassword(auth, email, password);
+    //         setSuccess(true);
+    //         setTimeout(handleClose, 2000);
+    //         console.log("User signed in!");
+    //     } catch (error) {
+    //         console.error(error);
+    //     }
+    // };
 
-    const handleRegister = async () => {
-        try {
-            await createUserWithEmailAndPassword(auth, email, password);
-            setSuccess(true);
-            setTimeout(handleClose, 2000);
-        } catch (error) {
-            console.error(error);
-        }
-    };
+    // const handleRegister = async () => {
+    //     try {
+    //         await createUserWithEmailAndPassword(auth, email, password);
+    //         setSuccess(true);
+    //         setTimeout(handleClose, 2000);
+    //     } catch (error) {
+    //         console.error(error);
+    //     }
+    // };
 
     return (
         <>
@@ -94,7 +90,7 @@ const UserAuthentication = () => {
                                 value={password}
                                 onChange={(e) => setPassword(e.target.value)}
                             />
-                            <Button
+                            {/* <Button
                                 variant="contained"
                                 color="primary"
                                 onClick={handleSignIn}
@@ -108,7 +104,7 @@ const UserAuthentication = () => {
                                 style={{ margin: "0 10px" }}
                             >
                                 Register
-                            </Button>
+                            </Button> */}
                         </>
                     )}
                 </Box>

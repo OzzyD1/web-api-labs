@@ -12,7 +12,6 @@ import { styled } from "@mui/material/styles";
 import { useTheme } from "@mui/material/styles";
 import useMediaQuery from "@mui/material/useMediaQuery";
 import UserAuthentication from "../authUserModal";
-import { auth } from "../../auth/firebase";
 import useAuth from "../../hooks/useAuth";
 import { AuthContext } from "../../contexts/authContext";
 
@@ -20,7 +19,7 @@ const Offset = styled("div")(({ theme }) => theme.mixins.toolbar);
 
 const SiteHeader = ({ history }) => {
     const [anchorEl, setAnchorEl] = useState(null);
-    const userEmail = useAuth(auth);
+    // const userEmail = useAuth(auth);
     const { authOpen, handleOpen, handleClose } = useContext(AuthContext);
 
     const open = Boolean(anchorEl);
@@ -48,14 +47,14 @@ const SiteHeader = ({ history }) => {
         setAnchorEl(event.currentTarget);
     };
 
-    const handleSignOut = async () => {
-        try {
-            await auth.signOut();
-            console.log("User signed out!");
-        } catch (error) {
-            console.error("Error signing out: ", error);
-        }
-    };
+    // const handleSignOut = async () => {
+    //     try {
+    //         await auth.signOut();
+    //         console.log("User signed out!");
+    //     } catch (error) {
+    //         console.error("Error signing out: ", error);
+    //     }
+    // };
 
     return (
         <>
@@ -103,7 +102,7 @@ const SiteHeader = ({ history }) => {
                                         {opt.label}
                                     </MenuItem>
                                 ))}
-                                <MenuItem
+                                {/* <MenuItem
                                     onClick={
                                         userEmail ? handleSignOut : handleOpen
                                     }
@@ -111,7 +110,7 @@ const SiteHeader = ({ history }) => {
                                     {userEmail
                                         ? "Sign Out"
                                         : "Sign in/Register"}
-                                </MenuItem>
+                                </MenuItem> */}
                             </Menu>
                         </>
                     ) : (
@@ -128,7 +127,7 @@ const SiteHeader = ({ history }) => {
                                     {opt.label}
                                 </Button>
                             ))}
-                            <Button
+                            {/* <Button
                                 variant="outlined"
                                 color="inherit"
                                 style={{ margin: "0 5px" }}
@@ -136,7 +135,7 @@ const SiteHeader = ({ history }) => {
                                 onClick={userEmail ? handleSignOut : handleOpen}
                             >
                                 {userEmail ? "Sign Out" : "Sign in/Register"}
-                            </Button>
+                            </Button> */}
                         </>
                     )}
                     <UserAuthentication

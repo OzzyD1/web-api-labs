@@ -7,13 +7,12 @@ import AddToWatchlistIcon from "../components/cardIcons/addToWatchlist";
 import AddToFavoritesIcon from "../components/cardIcons/addToFavorites";
 import Pagination from "@mui/material/Pagination";
 import Paper from "@mui/material/Paper";
-import { auth } from "../auth/firebase";
 import useAuth from "../hooks/useAuth";
 import SnackbarComponent from "../components/addedToSnackbar";
 import Box from "@mui/material/Box";
 
 const NowPlayingMoviesPage = (props) => {
-    const userEmail = useAuth(auth);
+    // const userEmail = useAuth(auth);
 
     const [snackbarOpen, setSnackbarOpen] = useState(false);
     const [currentPage, setCurrentPage] = useState(1);
@@ -49,17 +48,17 @@ const NowPlayingMoviesPage = (props) => {
             <PageTemplate
                 title="Now Playing"
                 movies={movies}
-                action={(movie) => {
-                    return userEmail ? (
-                        <>
-                            <AddToFavoritesIcon
-                                onAdd={handleClick}
-                                movie={movie}
-                            />
-                            <AddToWatchlistIcon movie={movie} />
-                        </>
-                    ) : null;
-                }}
+                // action={(movie) => {
+                //     return userEmail ? (
+                //         <>
+                //             <AddToFavoritesIcon
+                //                 onAdd={handleClick}
+                //                 movie={movie}
+                //             />
+                //             <AddToWatchlistIcon movie={movie} />
+                //         </>
+                //     ) : null;
+                // }}
             />
             <Paper>
                 <Box display="flex" justifyContent="center">

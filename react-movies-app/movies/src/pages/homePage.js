@@ -7,13 +7,12 @@ import AddToFavoritesIcon from "../components/cardIcons/addToFavorites";
 import AddToWatchlistIcon from "../components/cardIcons/addToWatchlist";
 import Pagination from "@mui/material/Pagination";
 import Paper from "@mui/material/Paper";
-import { auth } from "../auth/firebase";
 import useAuth from "../hooks/useAuth";
 import SnackbarComponent from "../components/addedToSnackbar";
 import Box from "@mui/material/Box";
 
 const HomePage = (props) => {
-    const userEmail = useAuth(auth);
+    // const userEmail = useAuth(auth);
 
     const [snackbarOpen, setSnackbarOpen] = useState(false);
     const [currentPage, setCurrentPage] = useState(1);
@@ -49,20 +48,20 @@ const HomePage = (props) => {
             <PageTemplate
                 title="Discover Movies"
                 movies={movies}
-                action={(movie) => {
-                    return userEmail ? (
-                        <>
-                            <AddToFavoritesIcon
-                                onAdd={handleClick}
-                                movie={movie}
-                            />
-                            <AddToWatchlistIcon
-                                onAdd={handleClick}
-                                movie={movie}
-                            />
-                        </>
-                    ) : null;
-                }}
+                // action={(movie) => {
+                //     return userEmail ? (
+                //         <>
+                //             <AddToFavoritesIcon
+                //                 onAdd={handleClick}
+                //                 movie={movie}
+                //             />
+                //             <AddToWatchlistIcon
+                //                 onAdd={handleClick}
+                //                 movie={movie}
+                //             />
+                //         </>
+                //     ) : null;
+                // }}
             />
             <Paper>
                 <Box display="flex" justifyContent="center">
