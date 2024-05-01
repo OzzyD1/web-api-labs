@@ -63,7 +63,7 @@ const HomePage = (props) => {
                 //     ) : null;
                 // }}
             />
-            <Paper>
+            {/* <Paper>
                 <Box display="flex" justifyContent="center">
                     <Pagination
                         count={data.total_pages}
@@ -76,7 +76,7 @@ const HomePage = (props) => {
                         }}
                     />
                 </Box>
-            </Paper>
+            </Paper> */}
 
             <SnackbarComponent
                 open={snackbarOpen}

@@ -1,9 +1,5 @@
-export const getMovies = ({ queryKey }) => {
-    const [, pagePart] = queryKey;
-    const { page } = pagePart;
-    return fetch(
-        `https://api.themoviedb.org/3/discover/movie?api_key=${process.env.REACT_APP_TMDB_KEY}&language=en-US&include_adult=false&include_video=false&page=${page}}`
-    )
+export const getMovies = () => {
+    return fetch(`http://localhost:8080/api/movies`)
         .then((response) => {
             if (!response.ok) {
                 throw new Error(response.json().message);
@@ -14,6 +10,16 @@ export const getMovies = ({ queryKey }) => {
             throw error;
         });
 };
+
+// Copied from labs movies app
+// export const getMovies = async () => {
+//     const response = await fetch("http://localhost:8080/api/movies", {
+//         headers: {
+//             Authorization: window.localStorage.getItem("token"),
+//         },
+//     });
+//     return response.json();
+// };
 
 export const getUpcomingMovies = () => {
     return fetch(
@@ -206,4 +212,29 @@ export const getPeopleCredits = ({ queryKey }) => {
         .catch((error) => {
             throw error;
         });
+};
+
+export const login = async (username, password) => {
+    const response = await fetch("http://localhost:8080/api/users", {
+        headers: {
+            "Content-Type": "application/json",
+        },
+        method: "post",
+        body: JSON.stringify({ username: username, password: password }),
+    });
+    return response.json();
+};
+
+export const signup = async (username, password) => {
+    const response = await fetch(
+        "http://localhost:8080/api/users?action=register",
+        {
+            headers: {
+                "Content-Type": "application/json",
+            },
+            method: "post",
+            body: JSON.stringify({ username: username, password: password }),
+        }
+    );
+    return response.json();
 };
