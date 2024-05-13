@@ -29,7 +29,7 @@ const HomePage = (props) => {
     if (isError) {
         return <h1>{error.message}</h1>;
     }
-    const movies = data.results;
+    const movies = data;
 
     const handleClick = () => {
         setSnackbarOpen(true);

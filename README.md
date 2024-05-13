@@ -1,3 +1,5 @@
-# Web App Dev 2: Web API Labs
+# Web App Assignment 2
 
-Practical labs for the WAD2 module
+## Extending the react movies app with our own API
+
+-   Integrated static APIs
