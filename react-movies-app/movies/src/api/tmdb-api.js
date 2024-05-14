@@ -1,14 +1,10 @@
-export const getMovies = () => {
-    return fetch(`http://localhost:8080/api/movies`)
-        .then((response) => {
-            if (!response.ok) {
-                throw new Error(response.json().message);
-            }
-            return response.json();
-        })
-        .catch((error) => {
-            throw error;
-        });
+export const getMovies = async () => {
+    const response = await fetch("http://localhost:8080/api/movies", {
+        headers: {
+            Authorization: window.localStorage.getItem("token"),
+        },
+    });
+    return response.json();
 };
 
 export const getUpcomingMovies = () => {

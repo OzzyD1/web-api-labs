@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import PageTemplate from "../components/templateMovieListPage";
 import { getUpcomingMovies } from "../api/tmdb-api";
 import { useQuery } from "react-query";
@@ -7,12 +7,12 @@ import AddToWatchlistIcon from "../components/cardIcons/addToWatchlist";
 import AddToFavoritesIcon from "../components/cardIcons/addToFavorites";
 import Pagination from "@mui/material/Pagination";
 import Paper from "@mui/material/Paper";
-import useAuth from "../hooks/useAuth";
+import { AuthContext } from "../contexts/authContext";
 import SnackbarComponent from "../components/addedToSnackbar";
 import Box from "@mui/material/Box";
 
 const UpcomingMoviesPage = (props) => {
-    // const userEmail = useAuth(auth);
+    const context = useContext(AuthContext);
 
     const [snackbarOpen, setSnackbarOpen] = useState(false);
     const [currentPage, setCurrentPage] = useState(1);
@@ -48,17 +48,20 @@ const UpcomingMoviesPage = (props) => {
             <PageTemplate
                 title="Upcoming Movies"
                 movies={movies}
-                // action={(movie) => {
-                //     return userEmail ? (
-                //         <>
-                //             <AddToFavoritesIcon
-                //                 onAdd={handleClick}
-                //                 movie={movie}
-                //             />
-                //             <AddToWatchlistIcon movie={movie} />
-                //         </>
-                //     ) : null;
-                // }}
+                action={(movie) => {
+                    return context.isAuthenticated ? (
+                        <>
+                            <AddToFavoritesIcon
+                                onAdd={handleClick}
+                                movie={movie}
+                            />
+                            <AddToWatchlistIcon
+                                onAdd={handleClick}
+                                movie={movie}
+                            />
+                        </>
+                    ) : null;
+                }}
             />
             <Paper>
                 <Box display="flex" justifyContent="center">

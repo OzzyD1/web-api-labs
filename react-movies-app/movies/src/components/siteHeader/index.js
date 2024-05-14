@@ -11,7 +11,6 @@ import { useNavigate } from "react-router-dom";
 import { styled } from "@mui/material/styles";
 import { useTheme } from "@mui/material/styles";
 import useMediaQuery from "@mui/material/useMediaQuery";
-import UserAuthentication from "../authUserModal";
 import { AuthContext } from "../../contexts/authContext";
 
 const Offset = styled("div")(({ theme }) => theme.mixins.toolbar);
@@ -24,15 +23,21 @@ const SiteHeader = ({ history }) => {
     const isMobile = useMediaQuery(theme.breakpoints.down("md"));
     const navigate = useNavigate();
 
-    const menuOptions = [
+    const commonMenuOptions = [
         { label: "Discover", path: "/" },
         { label: "Now Playing", path: "/movies/nowPlaying" },
         { label: "Popular", path: "/movies/popular" },
         { label: "Upcoming", path: "/movies/upcoming" },
         { label: "People", path: "movies/people" },
+        {
+            label: context.isAuthenticated ? context.userName : "Login/Signup",
+            path: "/login",
+        },
+    ];
+
+    const protectedMenuOptions = [
         { label: "Favorites", path: "/movies/favorites" },
         { label: "Watchlist", path: "/movies/watchlist" },
-        { label: "Login/Signup", path: "/login" },
     ];
 
     const handleMenuSelect = (pageURL) => {
@@ -42,15 +47,6 @@ const SiteHeader = ({ history }) => {
     const handleMenu = (event) => {
         setAnchorEl(event.currentTarget);
     };
-
-    // const handleSignOut = async () => {
-    //     try {
-    //         await auth.signOut();
-    //         console.log("User signed out!");
-    //     } catch (error) {
-    //         console.error("Error signing out: ", error);
-    //     }
-    // };
 
     return (
         <>
@@ -88,7 +84,7 @@ const SiteHeader = ({ history }) => {
                                 open={open}
                                 onClose={() => setAnchorEl(null)}
                             >
-                                {menuOptions.map((opt) => (
+                                {commonMenuOptions.map((opt) => (
                                     <MenuItem
                                         key={opt.label}
                                         onClick={() =>
@@ -102,7 +98,7 @@ const SiteHeader = ({ history }) => {
                         </>
                     ) : (
                         <>
-                            {menuOptions.map((opt) => (
+                            {commonMenuOptions.map((opt) => (
                                 <Button
                                     key={opt.label}
                                     color="inherit"
@@ -114,6 +110,34 @@ const SiteHeader = ({ history }) => {
                                     {opt.label}
                                 </Button>
                             ))}
+                            {context.isAuthenticated
+                                ? protectedMenuOptions.map((opt) => (
+                                      <>
+                                          <Button
+                                              key={opt.label}
+                                              color="inherit"
+                                              onClick={() =>
+                                                  handleMenuSelect(opt.path)
+                                              }
+                                              variant="outlined"
+                                              style={{ margin: "0 5px" }}
+                                              size="large"
+                                          >
+                                              {opt.label}
+                                          </Button>
+                                      </>
+                                  ))
+                                : null}
+                            {context.isAuthenticated ? (
+                                <Button
+                                    color="inherit"
+                                    variant="outlined"
+                                    size="large"
+                                    onClick={() => context.signout()}
+                                >
+                                    Logout
+                                </Button>
+                            ) : null}
                         </>
                     )}
                 </Toolbar>
