@@ -59,7 +59,6 @@ const App = () => {
                                 path="/reviews/form"
                                 element={<AddMovieReviewPage />}
                             />
-
                             <Route
                                 path="/movies/upcoming"
                                 element={<UpcomingMoviesPage />}
@@ -68,7 +67,6 @@ const App = () => {
                                 path="/movies/popular"
                                 element={<PopularMoviesPage />}
                             />
-
                             <Route
                                 path="/reviews/:id"
                                 element={<MovieReviewPage />}
