@@ -11,3 +11,7 @@
 -   You can see certain components depending if you are authenticated or not
     -   Add to favourites, watchlist and their respective site header buttons
 -   Protected Routes are there but the pages display nothing
+
+## To-Do
+
+-   Notify if users details dont match
