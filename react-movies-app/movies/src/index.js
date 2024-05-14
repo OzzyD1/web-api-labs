@@ -18,6 +18,9 @@ import NowPlayingMoviesPage from "./pages/nowPlayingMoviesPage";
 import PopularPeople from "./pages/popularPeoplePage";
 import PeopleDetailsPage from "./pages/peopleDetailsPage";
 import MovieDetailsPage from "./pages/movieDetailsPage";
+import LoginPage from "./pages/loginPage";
+import ProtectedRoutes from "./protectedRoutes";
+import SignUpPage from "./pages/signUpPage";
 import "./index.css";
 import "@fontsource/roboto/300.css";
 import "@fontsource/roboto/400.css";
@@ -42,6 +45,8 @@ const App = () => {
                     <SiteHeader />
                     <MoviesContextProvider>
                         <Routes>
+                            <Route path="/login" element={<LoginPage />} />
+                            <Route path="/signup" element={<SignUpPage />} />
                             <Route
                                 path="/people/:id"
                                 element={<PeopleDetailsPage />}
@@ -54,10 +59,7 @@ const App = () => {
                                 path="/reviews/form"
                                 element={<AddMovieReviewPage />}
                             />
-                            <Route
-                                path="/movies/favorites"
-                                element={<FavoriteMoviesPage />}
-                            />
+
                             <Route
                                 path="/movies/upcoming"
                                 element={<UpcomingMoviesPage />}
@@ -66,10 +68,7 @@ const App = () => {
                                 path="/movies/popular"
                                 element={<PopularMoviesPage />}
                             />
-                            <Route
-                                path="/movies/watchlist"
-                                element={<WatchlistMoviesPage />}
-                            />
+
                             <Route
                                 path="/reviews/:id"
                                 element={<MovieReviewPage />}
@@ -82,6 +81,16 @@ const App = () => {
                                 path="/movies/people"
                                 element={<PopularPeople />}
                             />
+                            <Route element={ProtectedRoutes}>
+                                <Route
+                                    path="/movies/watchlist"
+                                    element={<WatchlistMoviesPage />}
+                                />
+                                <Route
+                                    path="/movies/favorites"
+                                    element={<FavoriteMoviesPage />}
+                                />
+                            </Route>
                             <Route path="/movies/:id" element={<MoviePage />} />
                             <Route path="/" element={<HomePage />} />
                             <Route path="*" element={<Navigate to="/" />} />

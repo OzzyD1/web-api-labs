@@ -12,21 +12,16 @@ import { styled } from "@mui/material/styles";
 import { useTheme } from "@mui/material/styles";
 import useMediaQuery from "@mui/material/useMediaQuery";
 import UserAuthentication from "../authUserModal";
-import useAuth from "../../hooks/useAuth";
 import { AuthContext } from "../../contexts/authContext";
 
 const Offset = styled("div")(({ theme }) => theme.mixins.toolbar);
 
 const SiteHeader = ({ history }) => {
     const [anchorEl, setAnchorEl] = useState(null);
-    // const userEmail = useAuth(auth);
-    const { authOpen, handleOpen, handleClose } = useContext(AuthContext);
-
+    const context = useContext(AuthContext);
     const open = Boolean(anchorEl);
-
     const theme = useTheme();
     const isMobile = useMediaQuery(theme.breakpoints.down("md"));
-
     const navigate = useNavigate();
 
     const menuOptions = [
@@ -37,6 +32,7 @@ const SiteHeader = ({ history }) => {
         { label: "People", path: "movies/people" },
         { label: "Favorites", path: "/movies/favorites" },
         { label: "Watchlist", path: "/movies/watchlist" },
+        { label: "Login/Signup", path: "/login" },
     ];
 
     const handleMenuSelect = (pageURL) => {
@@ -102,15 +98,6 @@ const SiteHeader = ({ history }) => {
                                         {opt.label}
                                     </MenuItem>
                                 ))}
-                                {/* <MenuItem
-                                    onClick={
-                                        userEmail ? handleSignOut : handleOpen
-                                    }
-                                >
-                                    {userEmail
-                                        ? "Sign Out"
-                                        : "Sign in/Register"}
-                                </MenuItem> */}
                             </Menu>
                         </>
                     ) : (
@@ -127,21 +114,8 @@ const SiteHeader = ({ history }) => {
                                     {opt.label}
                                 </Button>
                             ))}
-                            {/* <Button
-                                variant="outlined"
-                                color="inherit"
-                                style={{ margin: "0 5px" }}
-                                size="large"
-                                onClick={userEmail ? handleSignOut : handleOpen}
-                            >
-                                {userEmail ? "Sign Out" : "Sign in/Register"}
-                            </Button> */}
                         </>
                     )}
-                    <UserAuthentication
-                        open={authOpen}
-                        handleClose={handleClose}
-                    />
                 </Toolbar>
             </AppBar>
             <Offset />

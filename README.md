@@ -2,4 +2,4 @@
 
 ## Extending the react movies app with our own API
 
--   Integrated static APIs
+-   Integrated static APIs (Except for home page)
